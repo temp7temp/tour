@@ -5,17 +5,28 @@ sorts EmptyTour Tour .
 subsorts EmptyTour < Tour .
 
 op 0 : -> EmptyTour .
-op s : Tour -> Tour .
+op w : Tour -> Tour .
+op b : Tour -> Tour .
 
 op <_|_|_|_> : Tour Tour Tour Tour -> Conf .
 
 vars I T1 T2 F : Tour .
 
-rl [it1] : < s ( I ) | T1 | T2 | F > =>   <  I | s ( T1 ) | T2 | F > .
+rl [it1w] : < w ( I ) | T1 | T2 | F > => < I | w ( T1 ) | T2 | F > .
+rl [it2w] : < w ( I ) | T1 | T2 | F > => < I | T1 | w ( T2 ) | F > .
+rl [t1fw] : < I | w ( T1 ) | T2 | F > => < I | T1 | T2 | w ( F ) > .
+rl [t2fw] : < I | T1 | w ( T2 ) | F > => < I | T1 | T2 | w ( F ) > .
+
+rl [it1b] : < b ( I ) | T1 | T2 | F > => < I | b ( T1 ) | T2 | F > .
+rl [it2b] : < b ( I ) | T1 | T2 | F > => < I | T1 | b ( T2 ) | F > .
+rl [t1fb] : < I | b ( T1 ) | T2 | F > => < I | T1 | T2 | b ( F ) > .
+rl [t2fb] : < I | T1 | b ( T2 ) | F > => < I | T1 | T2 | b ( F ) > .
 
 
 endm
 
 ***(
-search in TOUR : < s ( 0 ) | 0 | 0 | 0 > =>* < 0 | 0 | 0 | 0 > .
+
+search in TOUR : < b ( w ( 0 ) ) | 0 | 0 | 0 > =>* < 0 | 0 | 0 | 0 > .
+
 )
