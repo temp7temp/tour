@@ -1,0 +1,24 @@
+mod PING is 
+
+sort Conf .
+sort Coord OCoord .
+subsorts OCoord < Coord .
+
+op 0 : -> OCoord .
+op s : Coord -> Coord .
+
+op <_#_> : Coord Coord -> Conf .
+
+var I O : Coord .
+
+rl [up] : < s ( I ) # O > => < I # s ( O ) > .
+rl [down] : < I # s ( O ) > => < s ( I ) # O > .
+
+
+endm
+
+***(
+
+search in PING :  < s ( s ( s ( 0 ) ) ) # 0 > =>* < 0 # 0 > .
+
+)
