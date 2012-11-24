@@ -1,0 +1,22 @@
+
+mod TOURLA is 
+
+protecting TOUR .
+
+sort ConfLA .
+sort LastOpKey .
+
+
+op [_#_] : Conf LastOpKey -> ConfLA .
+
+
+--- one trn should be compiled to 3 step trn
+--- <Conf># => Conf#NeedKey => Conf#Key => Conf'#
+--- ...#NeedKey => eq #NeedKey = Key
+ 
+var TS : Tour .
+
+rl [w] : w ( TS ) => w ( 0 ) .
+
+endm
+
