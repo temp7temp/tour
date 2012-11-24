@@ -5,8 +5,11 @@ protecting TOUR .
 
 sort ConfLA .
 sort LastOpKey .
+sort Key .
 
 
+op k : -> EmptyTour .
+op kit : Tour -> Tour .
 op [_#_] : Conf LastOpKey -> ConfLA .
 
 
@@ -16,7 +19,9 @@ op [_#_] : Conf LastOpKey -> ConfLA .
  
 var TS : Tour .
 
-rl [w] : w ( TS ) => w ( 0 ) .
+eq kit ( w ( TS ) ) = w ( k ) .
+eq kit ( b ( TS ) ) = b ( k ) .
+eq kit ( 0 ) = 0 . 
 
 endm
 

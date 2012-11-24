@@ -12,8 +12,8 @@ op f : Tour -> Tour .
 op <_|_|_|_> : Tour Tour Tour Tour -> Conf .
 
 vars I T1 T2 F : Tour .
-var TE : Tour .
 
+var TE : Tour .
 eq  b ( b ( TE ) ) = f ( TE ) .
 
 rl [it1w] : < w ( I ) | T1 | T2 | F > => < I | w ( T1 ) | T2 | F > .
