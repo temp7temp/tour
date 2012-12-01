@@ -1,27 +1,45 @@
+mod TOUR is
 
-mod TOURLA is 
-
-protecting TOUR .
-
-sort ConfLA .
-sort LastOpKey .
-sort Key .
-
-
-op k : -> EmptyTour .
-op kit : Tour -> Tour .
-op [_#_] : Conf LastOpKey -> ConfLA .
-
-
---- one trn should be compiled to 3 step trn
---- <Conf># => Conf#NeedKey => Conf#Key => Conf'#
---- ...#NeedKey => eq #NeedKey = Key
- 
-var TS : Tour .
-
-eq kit ( w ( TS ) ) = w ( k ) .
-eq kit ( b ( TS ) ) = b ( k ) .
-eq kit ( 0 ) = 0 . 
+	sort Conf .
+	sorts EmptyTour Tour Key HashKey .
+	subsorts EmptyTour < Tour .
+	
+	op z : -> EmptyTour .
+	op w : Tour -> Tour .
+	op b : Tour -> Tour .
+	op f : Tour -> Tour .
+	
+	op wK : -> Key .
+	op bK : -> Key .
+	op zK : -> Key .
+	op e : -> Key .
+	
+	op st : Tour -> Key .
+	
+	op <_|_|_|_> # _ : Tour Tour Tour Tour HashKey -> Conf .
+	op [_] : Key -> HashKey .
+	op [_|_|_|_] : Key Key Key Key -> HashKey .
+	
+	vars I T1 T2 F : Tour .
+	vars K1 K2 K3 K4 : Key .
+	var TE : Tour .
+	
+	eq st ( w ( TE ) ) = wK .
+	eq st ( b ( TE ) ) = bK .
+	eq st ( z ) = zK .
+	
+---	rl [it1w] : < w ( I ) | T1 | T2 | F > => < I | w ( T1 ) | T2 | F > .
+	rl [it1west] : < w ( I ) | T1 | T2 | F > # [ e ] => 
+				< w ( I ) | T1 | T2 | F > # [ st ( w ( I ) ) | st ( T1 ) | st ( T2 ) | st ( F ) ] .
+	
+	rl [it1wste] : < w ( I ) | T1 | T2 | F > # [ K1 | K2 | K3 | K4 ] => 
+				< I | w ( T1 ) | T2 | F > # [ e ] .
 
 endm
 
+
+*** (
+
+search in TOUR : <  ( w ( b ( z ) ) )  | z | z | z > # [ e ] =>* < z | z | z | z > # [ e ] .
+
+)
