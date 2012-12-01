@@ -1,0 +1,33 @@
+fmod STXCORE is
+	protecting QID-LIST .
+    sorts Token Bubble NeTokenList .
+    op token : Qid -> Token
+         [special
+            (id-hook Bubble        (1 1)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op bubble : QidList -> Bubble
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op neTokenList : QidList -> NeTokenList
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid)
+             id-hook Exclude       ( . ))] .
+
+    sorts Decl DeclList PreModule .
+    subsort Decl < DeclList .
+
+endfm
+
+
+fmod STX is 
+
+
+
+endfm 
+
