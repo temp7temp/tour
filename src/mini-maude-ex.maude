@@ -2,6 +2,54 @@
   ---- from the Maude Manual
   ---- by the Maude team
   
+  fmod STXCORE is
+  	protecting QID-LIST .
+    sorts Token Bubble NeTokenList .
+    op token : Qid -> Token
+         [special
+            (id-hook Bubble        (1 1)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op bubble : QidList -> Bubble
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op neTokenList : QidList -> NeTokenList
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid)
+             id-hook Exclude       ( . ))] .
+
+    sorts Decl DeclList PreModule .
+    subsort Decl < DeclList .
+   
+  endfm 
+  
+  fmod CRTSPSTX is
+  	protecting META-LEVEL .
+  	
+  	var T T1 : Term .
+  
+  	op createDtlSignature : Term -> FModule .
+  	op compileDtlOp : Term -> OpDeclSet . 
+  	
+  	eq createDtlSignature ( T )
+  		= (	fmod 'DLTOP is
+  		 	nil
+			sorts none . ---- sorts extractSorts(T) .
+			none
+			compileDtlOp( T )
+			none
+			none
+  			endfm) . 
+  	
+  	
+  
+  endfm 
+  
   fmod EXTSIG is 
   protecting META-LEVEL .
   
@@ -102,9 +150,11 @@
     var  QIL : QidList .
     var  F : Qid .
     var  M : Module .
-
+    	
     op processPreModule : Term ~> FModule .
     eq processPreModule(T) = solveBubbles(T, extractSignature(T)) .
+    
+   	
 
     ---- solveBubbles
     op solveBubbles : Term FModule ~> FModule .
