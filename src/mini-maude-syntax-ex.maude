@@ -1,0 +1,75 @@
+  ---- from the book All About Maude
+  ---- from the Maude Manual
+  ---- by the Maude team
+
+  fmod MINI-MAUDE-SYNTAX is
+  	protecting META-LEVEL .
+    protecting QID-LIST .
+    sorts Token Bubble NeTokenList .
+    op token : Qid -> Token
+         [special
+            (id-hook Bubble        (1 1)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op bubble : QidList -> Bubble
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid))] .
+
+    op neTokenList : QidList -> NeTokenList
+         [special 
+            (id-hook Bubble        (1 -1)
+             op-hook qidListSymbol (__ : QidList QidList ~> QidList)
+             op-hook qidSymbol     (<Qids> : ~> Qid)
+             id-hook Exclude       ( . ))] .
+
+    sorts Decl DeclList PreModule .
+    subsort Decl < DeclList .
+    
+	op s_ : Token -> Decl .
+    
+    op __ : DeclList DeclList -> DeclList [assoc gather(e E)] .
+    
+  endfm
+  
+  fmod TRYSTX is 
+  protecting META-LEVEL .
+  
+  op TRN : -> Term .
+  
+  op tran : Term -> Term .
+  op fnl : Term -> Term .
+  
+  op proc : Term -> Term .
+  
+  vars T1 T2 : Term .
+  
+  eq TRN = ( 's 'Nat8 ) .
+  eq proc ( T1 ) = tran ( T1 ) .
+  eq tran ( 's_['token[T1]] ) = fnl ( downTerm( T1 , 'error ) ) .  
+  
+  endfm
+  
+  --- 's_['token[''Nat8.Sort]] 
+
+***(
+Maude> red in META-LEVEL :
+             metaParse(upModule('MINI-MAUDE-SYNTAX, false),
+               'fmod 'NAT3 'is
+                  'sort 'Nat3 '.
+                  'op 's_ ': 'Nat3 '-> 'Nat3 '.
+                  'op '0 ': '-> 'Nat3 '.
+                  'eq 's 's 's '0 '= '0 '.
+               'endfm,
+               'PreModule) .
+reduce in META-LEVEL : metaParse(upModule('MINI-MAUDE-SYNTAX, false), 'fmod
+    'NAT3 'is 'sort 'Nat3 '. 'op 's_ ': 'Nat3 '-> 'Nat3 '. 'op '0 ': '-> 'Nat3
+    '. 'eq 's 's 's '0 '= '0 '. 'endfm, 'PreModule) .
+rewrites: 2 in 0ms cpu (5ms real) (~ rewrites/second)
+result ResultPair: {'fmod_is_endfm['token[''NAT3.Qid],'__['sort_.['token[
+    ''Nat3.Qid]],'__['op_:_->_.['token[''s_.Qid],'neTokenList[''Nat3.Qid],
+    'token[''Nat3.Qid]],'__['op_:`->_.['token[''0.Qid],'token[''Nat3.Qid]],
+    'eq_=_.['bubble['__[''s.Qid,''s.Qid,''s.Qid,''0.Qid]],'bubble[
+    ''0.Qid]]]]]],'PreModule}
+)  

@@ -28,11 +28,11 @@ mod TOUR is
 	eq st ( b ( TE ) ) = bK .
 	eq st ( z ) = zK .
 	
----	rl [it1w] : < w ( I ) | T1 | T2 | F > => < I | w ( T1 ) | T2 | F > .
-	rl [it1west] : < w ( I ) | T1 | T2 | F > # [ e ] => 
+---	rl [it1w] : << w ( I ) | T1 | T2 | F >> => << I | w ( T1 ) | T2 | F >> .
+	rl < w ( I ) | T1 | T2 | F > # [ e ] => 
 				< w ( I ) | T1 | T2 | F > # [ st ( w ( I ) ) | st ( T1 ) | st ( T2 ) | st ( F ) ] .
 	
-	rl [it1wste] : < w ( I ) | T1 | T2 | F > # [ K1 | K2 | K3 | K4 ] => 
+	rl < w ( I ) | T1 | T2 | F > # [ K1 | K2 | K3 | K4 ] => 
 				< I | w ( T1 ) | T2 | F > # [ e ] .
 
 endm

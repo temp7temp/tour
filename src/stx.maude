@@ -21,13 +21,44 @@ fmod STXCORE is
 
     sorts Decl DeclList PreModule .
     subsort Decl < DeclList .
+    
+    sort Nat5 .
+	op Z : -> Token . 
+	op s_ : Token -> Decl .
+	op s_ : Decl -> Decl .
+    
 
 endfm
 
 
 fmod STX is 
+ 
+
+sort Nat5 .
+op Z : -> Nat5 . 
+op s_|_|_ : Nat5 Nat5 Nat5 -> Nat5 .
+
+var N1 : Nat5 .
+
+eq s Z | N1 | Z = Z .
+
+endfm
+
+fmod TRYSTX is
+including META-LEVEL .
+
+var T1 : Term .
+op trans : Term -> Term .
+
+eq trans( 's_.['token[T1]] ) = trans( 's_#_.['token[T1], 'token[T1]] ) .  
+
+endfm
+
+--- 's_['0.Nat3]
 
 
 
-endfm 
+
+	
+ 
 
