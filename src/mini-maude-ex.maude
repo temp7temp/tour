@@ -28,7 +28,7 @@
    
   endfm 
   
-  fmod CRTSPSTX is
+  fmod CRTSPECSTX is
   	protecting META-LEVEL .
   	
   	var T T1 : Term .
