@@ -28,27 +28,6 @@
    
   endfm 
   
-  fmod CRTSPECSTX is
-  	protecting META-LEVEL .
-  	
-  	var T T1 : Term .
-  
-  	op createDtlSignature : Term -> FModule .
-  	op compileDtlOp : Term -> OpDeclSet . 
-  	
-  	eq createDtlSignature ( T )
-  		= (	fmod 'DLTOP is
-  		 	nil
-			sorts none . ---- sorts extractSorts(T) .
-			none
-			compileDtlOp( T )
-			none
-			none
-  			endfm) . 
-  	
-  	
-  
-  endfm 
   
   fmod EXTSIG is 
   protecting META-LEVEL .
@@ -123,7 +102,6 @@
 	eq solveBubblesAux('eq_=_.['bubble[T1], 'bubble[T2]], M)
       = (eq getTerm(metaParse(M, downTerm(T1, nil), anyType)) 
            = getTerm(metaParse(M, downTerm(T2, nil), anyType))
-	  
            [none] .) .
     eq solveBubblesAux('__['eq_=_.['bubble[T1], 'bubble[T2]], T3], M)
       = (eq getTerm(metaParse(M, downTerm(T1, nil), anyType)) 
@@ -154,7 +132,7 @@
     op processPreModule : Term ~> FModule .
     eq processPreModule(T) = solveBubbles(T, extractSignature(T)) .
     
-   	
+    
 
     ---- solveBubbles
     op solveBubbles : Term FModule ~> FModule .
@@ -162,7 +140,6 @@
    
     eq solveBubbles('fmod_is_endfm['token[QI], T], M)
       = addEqs(M, solveBubblesAux(T, M)) .
-
    
 
     eq addEqs(fmod QI is 

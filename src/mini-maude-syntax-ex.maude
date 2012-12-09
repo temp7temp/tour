@@ -59,13 +59,11 @@ protecting META-LEVEL .
 	
 endfm
 
-fmod NAT5PROC is
+fmod NAT5PROCEQ is
 
 protecting META-LEVEL .
 
 op processEq : Term -> EquationSet .
-op extrArgs : Term -> Term .
-op trn : Term -> Term .
 
 vars T1 T2 : Term .
 
@@ -74,15 +72,14 @@ eq processEq( 'sp_|_[T1,T2] )
 		eq '<_#_>['sp_|_[T1,T2],'H:Hash] = '<_#_>['Z.Nat5,'H:Hash] [none] .
   		eq '<_#_>['sp_|_[T1,T2],'h.Hash] = '<_#_>['sp_|_[T1,T2] ,'hash`(_`,_`)['key[T1],'key[T2]]] [none] .		
 	) .
- 
 
 endfm
 
 --- reduce in META-LEVEL : getTerm( metaParse(upModule('NAT5STX, false), 'sp 's 's 's 'Z '| 's 's 's 'Z  , anyType ) )  .
 --- reduce in NAT5PROC : processEq ( 'sp_|_['s_['Z1.Term],'s_['s_['s_['Z2.Term]]]] ) .   
 
----//////////////////////////// Example syntax for////////////////////////////////---
----///////////////////////////////////////////////////////////////////////////////---  
+---//////////////////////////// Example syntax for ////////////////////////////////---
+---////////////////////////////////////////////////////////////////////////////////---  
  
 
 
