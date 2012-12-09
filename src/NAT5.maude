@@ -1,0 +1,38 @@
+fmod NAT5 is 
+sort Nat5 .
+
+op Z : -> Nat5 .
+op s_ : Nat5 -> Nat5 .
+op sp_|_ : Nat5 Nat5 -> Nat5 . 
+
+eq s s s s s Z = Z .
+eq sp s s  Z | s s Z = Z .
+
+endfm
+
+
+fmod NAT5KEY is
+sorts ConfHash Key Hash .
+sort Nat5 .
+
+op Z : -> Nat5 .
+op s_ : Nat5 -> Nat5 .
+op sp_|_ : Nat5 Nat5 -> Nat5 .
+
+op <_#_> : Nat5 Hash -> ConfHash .
+op key : Nat5 -> Key .
+op hash(_,_) : Key Key -> Hash .
+op h : -> Hash .
+
+var H : Hash . 
+
+eq s s s s s Z = Z .
+eq < sp s s  Z | s s s Z # h > 
+	= < sp s s  Z | s s s Z # hash( key ( s s Z ) , key ( s s s Z ) )  > .
+eq < sp s s  Z | s s s Z # H >  = < Z # H > .
+
+endfm
+
+***(
+
+)

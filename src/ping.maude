@@ -1,21 +1,13 @@
-mod PING is 
+fmod PING is 
 
-sort Conf .
-sort Coord OCoord .
-subsorts OCoord < Coord .
+sort Nat5 .
 
-op 0 : -> OCoord .
-op s : Coord -> Coord .
+op Z : -> Nat5 .
+op s_ : Nat5 -> Nat5 .
 
-op <_#_> : Coord Coord -> Conf .
+eq s s s s s Z = Z .
 
-var I O : Coord .
-
-rl [up] : < s ( I ) # O > => < I # s ( O ) > .
-rl [down] : < I # s ( O ) > => < s ( I ) # O > .
-
-
-endm
+endfm
 
 ***(
 
