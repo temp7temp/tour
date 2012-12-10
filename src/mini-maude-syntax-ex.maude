@@ -48,7 +48,6 @@ including SYNTAXCORE .
 ---//////////////////////////// Example syntax for////////////////////////////////--- 
   
 fmod NAT5STX is
-including SYNTAXCORE .
 protecting META-LEVEL .
 
 	sort Conf .
