@@ -75,7 +75,7 @@ eq processEq( 'sp_|_[T1,T2] )
 endfm
 
 --- reduce in META-LEVEL : getTerm( metaParse(upModule('NAT5STX, false), 'sp 's 's 's 'Z '| 's 's 's 'Z  , anyType ) )  .
---- reduce in NAT5PROC : processEq ( 'sp_|_['s_['Z1.Term],'s_['s_['s_['Z2.Term]]]] ) .   
+--- reduce in NAT5PROCEQ : processEq ( 'sp_|_['s_['Z1.Term],'s_['s_['s_['Z2.Term]]]] ) .   
 
 ---//////////////////////////// Example syntax for ////////////////////////////////---
 ---////////////////////////////////////////////////////////////////////////////////---  

@@ -1,0 +1,28 @@
+fmod CRTSPSTX is
+protecting META-LEVEL . 
+
+op createSpecStx : Term  -> FModule .
+op createSpecOpDecl : Term -> OpDeclSet .
+
+vars T T1 T2 T3 : Term .
+var TL : TermList .
+var  QI : Qid .
+
+eq createSpecStx( 'fmod_is_endfm['token[QI],T] ) 
+  =	(fmod 'SPECSTX is
+		including 'META-LEVEL .
+		sorts none . 
+		none
+		createSpecOpDecl(T) 
+		none
+		none
+	endfm) .
+	
+eq createSpecOpDecl(
+ '__['op_:_->_.['token[T1],'neTokenList[TL],'token[T2]]])
+      = (op downTerm(T1, 'error) : downTerm(TL, nil) 
+              -> downTerm(T2, 'error) [none] . ) .
+        --- extractOpDecls(T3)) .
+
+
+endfm
